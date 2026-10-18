@@ -1,0 +1,35 @@
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #f7fafc;
+  color: #0f172a;
+  margin: 0;
+  padding: 0;
+}
+
+.wrap { max-width: 980px; margin: 36px auto; padding: 18px; }
+.header { margin-bottom: 18px }
+.header h1 { margin: 0; font-size: 28px }
+.muted { color: #64748b; margin: 4px 0 0 0 }
+
+.search-form { display: flex; gap: 8px; margin-bottom: 12px }
+.search-form input { flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid #e2e8f0 }
+.search-form button { padding: 10px 14px; background: #0369a1; color: white; border: none; border-radius: 8px }
+
+.alert.error { background: #fee2e2; color: #b91c1c; padding: 8px 12px; border-radius: 8px }
+
+.places ul { list-style: none; padding: 0; margin: 8px 0 }
+.places li { padding: 8px 10px; background: white; border: 1px solid #e6eef6; margin-bottom: 8px; border-radius: 8px }
+.place-name { font-weight: 600 }
+.coords { color: #64748b; margin-left: 8px }
+.places-actions { margin-top: 8px }
+.places-actions button { padding: 8px 10px; border-radius: 8px; background: #0ea5e9; border: none; color: white }
+
+.panel { background: white; border-radius: 10px; padding: 14px; margin-top: 12px; border: 1px solid #e6eef6 }
+.current { display: flex; justify-content: space-between; align-items: center }
+.temp { font-size: 42px; font-weight: 700 }
+.desc { color: #475569 }
+.meta { color: #64748b }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 10px }
+.day { background: #f8fafc; border-radius: 8px; padding: 10px; text-align: center }
+
+.footer { margin-top: 20px; color: #64748b }

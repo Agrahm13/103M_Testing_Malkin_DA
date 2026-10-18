@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Weather Dashboard — 103M_Testing_Malkin_DA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="header">
+        <h1>Weather Dashboard</h1>
+        <p class="muted">A small dashboard adapted into this repository (Open‑Meteo + Nominatim)</p>
+      </header>
+
+      <main>
+        <form method="post" class="search-form">
+          <input name="query" placeholder="City or place (e.g. Moscow)" value="{{ query }}" />
+          <button type="submit">Search</button>
+        </form>
+
+        {% if error %}
+        <div class="alert error">{{ error }}</div>
+        {% endif %}
+
+        {% if places and places|length > 0 %}
+        <section class="places">
+          <h2>Matches</h2>
+          <form method="post">
+            <input type="hidden" name="query" value="{{ query }}" />
+            <ul>
+              {% for p in places %}
+              <li>
+                <label>
+                  <input type="radio" name="place_index" value="{{ loop.index0 }}" {% if loop.index0 == 0 %}checked{% endif %} />
+                  <span class="place-name">{{ p.display_name }}</span>
+                  <small class="coords">({{ p.lat }}, {{ p.lon }})</small>
+                </label>
+              </li>
+              {% endfor %}
+            </ul>
+            <div class="places-actions">
+              <button type="submit">Show weather for selected</button>
+            </div>
+          </form>
+        </section>
+        {% endif %}
+
+        {% if forecast %}
+        <section class="panel">
+          <h2>Current conditions</h2>
+          <div class="current">
+            <div class="left">
+              <div class="temp">{{ forecast.current.temperature }}°C</div>
+              <div class="desc">{{ forecast.current.description }}</div>
+              <div class="meta">Wind {{ forecast.current.windspeed }} m/s • {{ forecast.current.winddirection }}°</div>
+            </div>
+            <div class="right">
+              <div class="time">As of {{ forecast.current.time }}</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>7-day forecast</h2>
+          <div class="grid">
+            {% for i in range(forecast.daily.time|length) %}
+            <article class="day">
+              <div class="date">{{ forecast.daily.time[i] }}</div>
+              <div class="range">{{ forecast.daily.min[i] }}° / {{ forecast.daily.max[i] }}°</div>
+              <div class="code">Code: {{ forecast.daily.codes[i] }}</div>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+
+      </main>
+
+      <footer class="footer">
+        <p>Adapted for the repository: <strong>103M_Testing_Malkin_DA</strong></p>
+      </footer>
+    </div>
+  </body>
+</html>
